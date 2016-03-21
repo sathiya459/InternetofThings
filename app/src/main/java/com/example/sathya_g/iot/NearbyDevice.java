@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class ListUser extends Fragment implements AbsListView.OnItemClickListener {
+    public class NearbyDevice extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,23 +53,17 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static ListUser newInstance(int sectionNumber) {
-        ListUser fragment = new ListUser();
+    public static NearbyDevice newInstance(int sectionNumber) {
+        NearbyDevice fragment = new NearbyDevice();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         ArrayList<String> listString=new ArrayList<>();
-        listString.add("User1");
-        listString.add("User2");
-        listString.add("User3");
-        listString.add("User4");
-        listString.add("User5");
-        listString.add("User6");
-        listString.add("User7");
-        listString.add("User8");
-        listString.add("User9");
-        listString.add("User10");
-        listString.add("User11");
-        listString.add("User12");
+        listString.add("NearbyDevice1");
+        listString.add("NearbyDevice2");
+        listString.add("NearbyDevice3");
+        listString.add("NearbyDevice4");
+        listString.add("NearbyDevice5");
+
         args.putStringArrayList(ARG_PARAM1, listString);
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +73,7 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListUser() {
+    public NearbyDevice() {
     }
 
     @Override
@@ -97,7 +91,7 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item4, container, false);
+        View view = inflater.inflate(R.layout.fragment_item6, container, false);
 
         Bundle bundle=getArguments();
         ArrayList<String> listString=bundle.getStringArrayList(ARG_PARAM1);

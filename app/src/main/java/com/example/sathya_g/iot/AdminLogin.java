@@ -17,20 +17,11 @@ public class AdminLogin extends AppCompatActivity {
         setContentView(R.layout.activity_admin_login);
 
 
-        String msg;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                msg= null;
-            } else {
-                msg= extras.getString("msg");
-            }
-        } else {
-            msg= (String) savedInstanceState.getSerializable("msg");
-        }
+        Intent mIntent= getIntent();
+        String msg= mIntent.getStringExtra("DATA");
 
 
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
         Button mButton = (Button) findViewById(R.id.button3);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +44,8 @@ public class AdminLogin extends AppCompatActivity {
 
     private void callAdminHome() {
         Intent intent = new Intent(AdminLogin.this, AdminHome.class);
-        String msg="none";
-        intent.putExtra("mgs",msg);
+        String msg="admin";
+        intent.putExtra("DATA","admin");
         startActivity(intent);
 
     }
@@ -62,7 +53,7 @@ public class AdminLogin extends AppCompatActivity {
     private void callUserLogin() {
         Intent intent = new Intent(AdminLogin.this, UserLogin.class);
         String msg="none";
-        intent.putExtra("mgs",msg);
+        intent.putExtra("DATA",msg);
         startActivity(intent);
     }
 

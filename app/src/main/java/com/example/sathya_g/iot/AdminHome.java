@@ -1,6 +1,8 @@
 package com.example.sathya_g.iot;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 public class AdminHome extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    private boolean admin=false;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -32,10 +35,21 @@ public class AdminHome extends AppCompatActivity
      */
     private CharSequence mTitle;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
+
+       // new AsynClass().execute("");
+
+        Intent mIntent= getIntent();
+        String msg= mIntent.getStringExtra("DATA");
+        if(msg.equals("admin"))admin=true;
+
+        callToast(msg);
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -47,20 +61,7 @@ public class AdminHome extends AppCompatActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         /******************sathya******************************/
-        String msg;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                msg= null;
-            } else {
-                msg= extras.getString("msg");
-            }
-        } else {
-            msg= (String) savedInstanceState.getSerializable("msg");
-        }
 
-
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
     /****************************************************/
     }
@@ -68,30 +69,70 @@ public class AdminHome extends AppCompatActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Fragment frag;
-        switch (position) {
+       switch (position) {
+            case 0:
+                callToast("home");
+                callAdminDevice(position);
+                break;
             case 1:
-                frag = new BlankFragment();
+                callToast("my device");
+                callAdminDevice(position);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                callToast("nearby device ");
+                callNearbyDevice(position);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                if(admin){
+                    callToast("listUser");
+                    callListUser(position);
+                }else{
+                    callToast("Available Only for ADMIN !");
+                }
                 break;
             case 4:
-                mTitle = getString(R.string.title_section4);
+                if(admin){
+                    callToast("Listaccess");
+                    callAdminDevice(position);
+                }else{
+                    callToast("\"Available Only for ADMIN !");
+
+                }
                 break;
-            case 5:
-                mTitle = getString(R.string.title_section5);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_section6);
+           case 5:
+               callToast("logout");
+                finish();
+                //callAdminDevice(position);
                 break;
         }
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, AdminDevice.newInstance(position + 1))
+//                .commit();
+    }
+
+    private void callNearbyDevice(int position) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, BlankFragment.newInstance(position + 1))
+                .replace(R.id.container, NearbyDevice.newInstance(position + 1))
+                .commit();
+    }
+
+    private void callListUser(int position) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, ListUser.newInstance(position + 1))
+                .commit();
+    }
+
+    private void callToast(String s) {
+        Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+    }
+
+    private void callAdminDevice(int position) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, AdminDevice.newInstance(position + 1))
                 .commit();
     }
 
@@ -158,6 +199,7 @@ public class AdminHome extends AppCompatActivity
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -193,5 +235,40 @@ public class AdminHome extends AppCompatActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
+    public class AsynClass extends AsyncTask<String,Void,String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            int i=0;
+            while (i<=3){
+                try {
+                    callToast("bagroung task");
+                    Thread.sleep(3000);
+                    i++;
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+            callToast("post - Executed");
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {
+            callToast("Pre - execute");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
+
+
 
 }

@@ -2,7 +2,7 @@ package com.example.sathya_g.iot;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +23,7 @@ import com.example.sathya_g.iot.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class AdminDevices extends Fragment implements AbsListView.OnItemClickListener {
+public class ItemFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,16 +35,24 @@ public class AdminDevices extends Fragment implements AbsListView.OnItemClickLis
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    /**
+     * The fragment's ListView/GridView.
+     */
     private AbsListView mListView;
+
+    /**
+     * The Adapter which will be used to populate the ListView/GridView with
+     * Views.
+     */
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-    public static AdminDevices newInstance(int sectionNumber) {
-        AdminDevices fragment = new AdminDevices();
+    public static ItemFragment newInstance(String param1, String param2) {
+        ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,28 +61,27 @@ public class AdminDevices extends Fragment implements AbsListView.OnItemClickLis
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AdminDevices() {
+    public ItemFragment() {
     }
 
- //   @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//
-//
-//        // TODO: Change Adapter to display your content
-//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
-//    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+
+        // TODO: Change Adapter to display your content
+        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
-
-        View view = inflater.inflate(R.layout.fragment_item2, container, false);
+        View view = inflater.inflate(R.layout.fragment_item5, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);

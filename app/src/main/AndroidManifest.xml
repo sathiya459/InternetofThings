@@ -28,6 +28,7 @@
             android:name=".AdminHome"
             android:label="@string/title_activity_admin_home" >
         </activity>
+
     </application>
 
 </manifest>

@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class ListUser extends Fragment implements AbsListView.OnItemClickListener {
+public class AdminDevice extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,23 +53,15 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static ListUser newInstance(int sectionNumber) {
-        ListUser fragment = new ListUser();
+    public static AdminDevice newInstance(int sectionNumber) {
+        AdminDevice fragment = new AdminDevice();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         ArrayList<String> listString=new ArrayList<>();
-        listString.add("User1");
-        listString.add("User2");
-        listString.add("User3");
-        listString.add("User4");
-        listString.add("User5");
-        listString.add("User6");
-        listString.add("User7");
-        listString.add("User8");
-        listString.add("User9");
-        listString.add("User10");
-        listString.add("User11");
-        listString.add("User12");
+        listString.add("devce1");
+        listString.add("devce2");
+        listString.add("devce3");
+        listString.add("devce4");
         args.putStringArrayList(ARG_PARAM1, listString);
         fragment.setArguments(args);
         return fragment;
@@ -79,7 +71,7 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListUser() {
+    public AdminDevice() {
     }
 
     @Override
@@ -92,7 +84,7 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
         }
 
         // TODO: Change Adapter to display your content
-    }
+      }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,13 +94,13 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
         Bundle bundle=getArguments();
         ArrayList<String> listString=bundle.getStringArrayList(ARG_PARAM1);
         mListView=(ListView)view.findViewById(android.R.id.list);
-        mListView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice, listString));
+        mListView.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_singlechoice,listString));
         //Toast.makeText(getActivity(), "running", Toast.LENGTH_SHORT).show();
 
 
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        mListView.setOnItemClickListener((AdapterView.OnItemClickListener)this);
 
         return view;
     }
@@ -128,13 +120,14 @@ public class ListUser extends Fragment implements AbsListView.OnItemClickListene
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TextView textView=(TextView)parent.getChildAt(position);
-        textView.setText("Disabled");
-        view.setBackgroundColor(Color.MAGENTA);
-        view.setEnabled(false);
+            TextView textView=(TextView)parent.getChildAt(position);
+            textView.setText("sathya");
+            view.setBackgroundColor(Color.MAGENTA);
+            view.setEnabled(false);
 
-        Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
-    }
+
+            Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
+        }
 
     /**
      * The default content for this Fragment has a TextView that is shown when

@@ -17,21 +17,11 @@ public class UserLogin extends AppCompatActivity {
         setContentView(R.layout.activity_user_login);
 
 
-
-        String msg;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                msg= null;
-            } else {
-                msg= extras.getString("msg");
-            }
-        } else {
-            msg= (String) savedInstanceState.getSerializable("msg");
-        }
+        Intent mIntent= getIntent();
+        String msg= mIntent.getStringExtra("DATA");
 
 
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
 
         Button mButton = (Button) findViewById(R.id.button);
@@ -41,15 +31,29 @@ public class UserLogin extends AppCompatActivity {
                 callAdminLogin();
             }
         });
-
+        Button mButton1= (Button) findViewById(R.id.button2);
+        mButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callUserHome();
+            }
+        });
 
 
     }
 
+    private void callUserHome() {
+        Intent intent = new Intent(UserLogin.this, AdminHome.class);
+        String msg="user";
+        intent.putExtra("DATA",msg);
+        startActivity(intent);
+    }
+
+
     private void callAdminLogin() {
         Intent intent = new Intent(UserLogin.this, AdminLogin.class);
         String msg="none";
-        intent.putExtra("mgs",msg);
+        intent.putExtra("DATA",msg);
         startActivity(intent);
     }
 

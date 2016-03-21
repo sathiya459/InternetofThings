@@ -3,6 +3,7 @@ package com.example.sathya_g.iot;
 import android.app.Activity;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -56,6 +57,8 @@ public class BlankFragment extends Fragment implements AbsListView.OnItemClickLi
     }
 
     public BlankFragment() {
+
+
     }
 
     @Override
@@ -65,16 +68,17 @@ public class BlankFragment extends Fragment implements AbsListView.OnItemClickLi
 
 
 
+
         View view = inflater.inflate(R.layout.fragment_item2, container, false);
 
         Bundle bundle=getArguments();
         ArrayList<String> listString=bundle.getStringArrayList(ARG_PARAM1);
         final ListView locationList=(ListView)view.findViewById(android.R.id.list);
         locationList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_singlechoice,listString));
-locationList.setItemChecked(1, true);
-        locationList.setItemChecked(3,true);
-        locationList.setItemChecked(4,true);
-        Toast.makeText(getActivity(),"running",Toast.LENGTH_SHORT).show();
+        //callToast("running");
+        //new AsynchronusClass().execute("");
+
+
       /*  mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
 
@@ -101,16 +105,25 @@ locationList.setItemChecked(1, true);
                 getArguments().getInt(ARG_SECTION_NUMBER));
     }
     public void onDetach() {
-        super.onDetach( );
+        super.onDetach();
 
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TextView textView=(TextView)parent.getChildAt(position);
         textView.setText("sathya");
-       view.setBackgroundColor(Color.RED);
-        Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
+       view.setBackgroundColor(Color.MAGENTA);
+        view.setEnabled(false);
+
+        callToast("" +position);
     }
+    private void callToast(String s) {
+        Toast.makeText(getActivity(),s,Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
 }
 
 

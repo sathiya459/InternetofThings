@@ -29,6 +29,9 @@ import android.widget.Toast;
  */
 public class NavigationDrawerFragment extends Fragment {
 
+    private checkAuthentication mCheckAuthentication;
+
+
     /**
      * Remember the position of the selected item.
      */
@@ -49,8 +52,7 @@ public class NavigationDrawerFragment extends Fragment {
      * Helper component that ties the action bar to the navigation drawer.
      */
     private ActionBarDrawerToggle mDrawerToggle;
-
-    private DrawerLayout mDrawerLayout;
+   private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
@@ -58,8 +60,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    public NavigationDrawerFragment() {
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,11 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+
+
+
+
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
@@ -252,13 +258,16 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+           callToast("Example action.");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void callToast(String s) {
+        Toast.makeText(getActivity(),s,Toast.LENGTH_SHORT).show();
+    }
     /**
      * Per the navigation drawer design guidelines, updates the action bar to show the global app
      * 'context', rather than just what's in the current screen.
